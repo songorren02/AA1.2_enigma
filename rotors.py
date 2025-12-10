@@ -37,6 +37,4 @@ def read_rotor(rotor_file):
     except FileNotFoundError:
         print(f"[ERROR] No se ha encontrado el archivo {rotor_file}")
         return None
-    
-    
-            
+         
