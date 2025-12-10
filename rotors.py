@@ -22,10 +22,21 @@ def read_rotor(rotor_file):
                     clean_line = stripped.upper()
                     lines.append(clean_line)
 
-            return lines
+        #Abecedario desordenado y notch
+        wiring = lines[0]
+        #Definir Z = notch si no hay uno predefinido
+        notch = lines[1] if len(lines) > 1 else "Z" 
+
+        #Validar notch y wiring
+        if len(wiring) != 26 or set(wiring) != set(ALPH):
+            print(f"[ERROR] {rotor_file}: Abecedario inválido")
+            return None
+        
+        return wiring, notch
     
     except FileNotFoundError:
         print(f"[ERROR] No se ha encontrado el archivo {rotor_file}")
-
+        return None
+    
     
             
