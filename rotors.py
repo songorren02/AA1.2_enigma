@@ -38,4 +38,3 @@ def read_rotor(rotor_file):
         print(f"[ERROR] No se ha encontrado el archivo {rotor_file}")
         return None
          
-read_rotor("prueba")
