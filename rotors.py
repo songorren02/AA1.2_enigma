@@ -38,3 +38,22 @@ def read_rotor(rotor_file):
         print(f"[ERROR] No se ha encontrado el archivo {rotor_file}")
         return None
          
+#Invertir el wiring para poder desencriptarlo más tarde
+def invert_wiring(wiring):
+    #Inicialización de la lista invertida
+    inv = ["*"]*26
+
+    #Iterar sobre el wiring
+    for i, ch in enumerate(wiring):
+        #Calcular el índice del caracter
+        index = ALPH.index(ch)
+        
+        #Sustituir en la lista invertida
+        inv[index] = ALPH[i]
+    
+    return "".join(inv)
+
+wiring, notch = read_rotor("rotors/rotor1.txt")
+print(wiring, notch)
+
+print(invert_wiring(wiring))
