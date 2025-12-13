@@ -1,8 +1,10 @@
 import string
 
-#Constante del alfabeto
-ALPH = string.ascii_uppercase
 
+ALPH = string.ascii_uppercase #Constante del alfabeto
+AMOUNT_LETTERS = 26 #Constante de cantidad de letras del alfabeto
+
+#Transcribir el rotor
 def read_rotor(rotor_file):
     try:
         with open(rotor_file, "r") as file:
@@ -38,3 +40,45 @@ def read_rotor(rotor_file):
         print(f"[ERROR] No se ha encontrado el archivo {rotor_file}")
         return None
          
+#Invertir el wiring para poder desencriptarlo más tarde
+def invert_wiring(wiring):
+    #Inicialización de la lista invertida
+    inv = ["*"]*26
+
+    #Iterar sobre el wiring
+    for i, ch in enumerate(wiring):
+        #Calcular el índice del caracter
+        index = ALPH.index(ch)
+        
+        #Sustituir en la lista invertida
+        inv[index] = ALPH[i]
+    
+    return "".join(inv)
+
+#Cargar el rotor y guardar los elementos en un diccionario
+def rotor_load(wiring, notch="Z", pos="A"):
+    return{
+        "wiring": wiring,
+        "inverted": invert_wiring(wiring),
+        "notch": notch,
+        "position": pos
+    }
+
+#Avanzar rotor
+def avanzar_rotors(rotor_1, rotor_2, rotor_3):
+    #Rotor 1 siempre rota (%26 para que no se salga del array --> residuos 0 - 25)
+    rotor_1["position"] = (rotor_1["position"] + 1) % AMOUNT_LETTERS
+
+    #Calcular indice del notch en el APLH
+    idx_notch_rotor_1 = ALPH.index(rotor_1["notch"])
+
+    #Rotar el rotor 2 
+    if rotor_1["position"] == idx_notch_rotor_1:
+        rotor_2["position"] = (rotor_2["position"] + 1) % AMOUNT_LETTERS
+
+        #Calcular indice del notch en el ALPH
+        idx_notch_rotor_2 = ALPH.index(rotor_2["notch"])
+
+        #Comprobar si en esta rotación coincide el notch
+        if rotor_2["position"] == idx_notch_rotor_2:
+            rotor_3["position"] = (rotor_3["position"] + 1) % AMOUNT_LETTERS
