@@ -53,7 +53,11 @@ def invert_wiring(wiring):
     
     return "".join(inv)
 
-wiring, notch = read_rotor("rotors/rotor1.txt")
-print(wiring, notch)
-
-print(invert_wiring(wiring))
+#Cargar el rotor y guardar los elementos en un diccionario
+def rotor_load(wiring, notch="Z", pos="A"):
+    return{
+        "wiring": wiring,
+        "inverted": invert_wiring(wiring),
+        "notch": notch,
+        "position": pos
+    }
