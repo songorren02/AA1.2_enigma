@@ -13,7 +13,7 @@ def normalizar_texto(texto):
     #Quitamos mayusculas, espacios y caracteres especiales
     texto = texto.upper()
     texto = texto.replace(" ", "")
-    texto = re.sub(r'[^\w]', '', texto) 
+    texto = re.sub(r'[^A-Z]', '', texto) 
 
     contador = 0
     texto_new = ""
@@ -45,7 +45,7 @@ def input_rotor_encrypt(rotor, letra):
     cripted_idx = ALPH.index(cripted)
 
     #Quitamos la rotación para obtener el indice real
-    output = (cripted_idx - rotor["posicion"]) % 26
+    output = (cripted_idx - rotor["position"]) % 26
 
     return ALPH[output]
 
@@ -65,7 +65,7 @@ def input_rotor_decrypt(rotor, letra):
     cripted_idx = ALPH.index(cripted)
 
     #Quitamos la rotación para obtener el indice real
-    output = (cripted_idx - rotor["posicion"]) % 26
+    output = (cripted_idx - rotor["position"]) % 26
 
     return ALPH[output]
 

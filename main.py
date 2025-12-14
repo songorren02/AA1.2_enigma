@@ -42,7 +42,7 @@ def print_menu():
  
 print_menu()
 
-def choose_menu():
+def choose_menu(rotor_1, rotor_2, rotor_3):
     opt = int(input("¿Qué opción quieres hacer? "))
 
     if opt == 1:
@@ -62,4 +62,4 @@ def choose_menu():
     else:
         print("[ERROR] Opción inválida")
 
-choose_menu()
+choose_menu(rotor_1, rotor_2, rotor_3)

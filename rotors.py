@@ -64,7 +64,7 @@ def rotor_load(wiring, notch="Z", pos="A"):
         "wiring": wiring,
         "inverted": invert_wiring(wiring),
         "notch": notch,
-        "position": pos
+        "position": ALPH.index(pos)
     }
 
 #Avanzar rotor
