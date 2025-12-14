@@ -71,7 +71,7 @@ def input_rotor_decrypt(rotor, letra):
 
 
 #Cifrar el mensaje
-def cifrar(texto, rotor_1, rotor_2, rotor_3):
+def encrypt(texto, rotor_1, rotor_2, rotor_3):
     output = ""
 
     #Recorremos el mensaje
@@ -89,3 +89,21 @@ def cifrar(texto, rotor_1, rotor_2, rotor_3):
     
     return output
 
+#Descrifrar mensaje
+def decrypt(texto, rotor_1, rotor_2, rotor_3):
+    output = ""
+
+    #Recorremos el mensaje
+    for ch in texto:
+        #Avanzamos/comprovamos notchs
+        r.avanzar_rotors(rotor_1, rotor_2, rotor_3)
+        
+        #Le pasamos la letra a los rotores
+        ch = input_rotor_decrypt(rotor_3, ch)
+        ch = input_rotor_decrypt(rotor_2, ch)
+        ch = input_rotor_decrypt(rotor_1, ch)
+
+        #Concatenamos en output
+        output += ch
+    
+    return output
