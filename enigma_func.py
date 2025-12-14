@@ -109,7 +109,7 @@ def decrypt(texto, rotor_1, rotor_2, rotor_3):
     return output
 
 #Abrir el archivo del mensaje
-def open_msg(file_name="mensaje.txt"):
+def open_msg(file_name):
     try:
         with open(file_name, "r",) as file:
             #Leer msg
@@ -124,6 +124,6 @@ def open_msg(file_name="mensaje.txt"):
     return None
 
 #Guardar el mensaje en archivo
-def save_msg(texto, file_name="Cifrado.txt"):
+def save_msg(texto, file_name):
     with open(file_name, "w") as file:
         file.write(texto)

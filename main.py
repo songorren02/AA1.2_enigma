@@ -3,6 +3,9 @@ import rotors as r
 import time
 
 NUM_ROTORES = 3
+MSG_FILE = "mensaje.txt"
+ENCRYPTED_FILE = "output/cifrado.txt"
+DECRYPTED_FILE = "output/mensaje_desencriptado.txt"
 
 #Leer rotores desde los archivos
 wiring_1, notch_1 = r.read_rotor("rotors/rotor1.txt")
@@ -56,7 +59,7 @@ def choose_menu(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posicio
         rotor_1, rotor_2, rotor_3 = r.reset_rotors(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posiciones)
 
         #Abrir archivo
-        msg = f.open_msg()
+        msg = f.open_msg(MSG_FILE)
         
         #Encriptar el texto
         texto_encrypted = f.encrypt(msg, rotor_1, rotor_2, rotor_3)
@@ -65,7 +68,7 @@ def choose_menu(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posicio
         texto_espaced = f.espacios(texto_encrypted)
 
         #Guardar en archivo
-        f.save_msg(texto_espaced)
+        f.save_msg(texto_espaced, ENCRYPTED_FILE)
 
         #Mensajes por terminal
         print("\n[ENIGMA] Cifrando mensaje...")
@@ -75,6 +78,22 @@ def choose_menu(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posicio
     elif opt == 2: #Descifrar
         #Reset de los rotores
         rotor_1, rotor_2, rotor_3 = r.reset_rotors(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posiciones)
+
+        #Abrimos con open_msg() así normalizamos texto que se pueda haber escrito a mano
+        msg_encrypted = f.open_msg(ENCRYPTED_FILE)
+
+        #Desencriptar el mensaje
+        msg_decrypted = f.decrypt(msg_encrypted, rotor_1, rotor_2, rotor_3)
+
+        #Guardamos en archivop
+        f.save_msg(msg_decrypted, DECRYPTED_FILE)
+
+        #Mensajes por terminal
+        print("\n[ENIGMA] Descifrando mensaje...")
+        time.sleep(1)
+        print("[ENIGMA] Mensaje desencriptado con éxito!")
+
+
 
     elif opt == 3:
         #Funcion editar rotor
