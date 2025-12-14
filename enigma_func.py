@@ -1,5 +1,6 @@
 import re
 import string
+import rotors as r
 
 ALPH = string.ascii_uppercase #Constante del alfabeto
 AMOUNT_LETTERS = 26 #Constante de cantidad de letras del alfabeto
@@ -67,3 +68,24 @@ def input_rotor_decrypt(rotor, letra):
     output = (cripted_idx - rotor["posicion"]) % 26
 
     return ALPH[output]
+
+
+#Cifrar el mensaje
+def cifrar(texto, rotor_1, rotor_2, rotor_3):
+    output = ""
+
+    #Recorremos el mensaje
+    for ch in texto:
+        #Avanzamos/comprovamos notchs
+        r.avanzar_rotors(rotor_1, rotor_2, rotor_3)
+        
+        #Le pasamos la letra a los rotores
+        ch = input_rotor_encrypt(rotor_1, ch)
+        ch = input_rotor_encrypt(rotor_2, ch)
+        ch = input_rotor_encrypt(rotor_3, ch)
+
+        #Concatenamos en output
+        output += ch
+    
+    return output
+
