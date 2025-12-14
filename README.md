@@ -10,15 +10,15 @@ El objetivo es recrear su funcionamiento básico en Python, permitiendo al usuar
 - `.gitignore` → Archivos y carpetas ignorados por Git.  
 - `LICENSE` → Licencia MIT, que permite usar y modificar libremente el código.  
 - `README.md` → Documento de presentación del proyecto.  
-- `enigma/` → Carpeta principal con el código fuente de la simulación.
+- `rotors/` → Archivos .txt de los rotores usados en el proyecto. Por defecto vienen los rotores típicos de la máquina real.
+- - `output/` → Contiene los archivos de output generados por el programa: cifrado.txt y desencriptado.txt.
 
 ---
 
 ## 🚀 Características principales
 
 - Simulación del **cifrado y descifrado** de mensajes.  
-- Configuración de **rotores y reflectores** para personalizar la máquina.  
-- Implementación sencilla y modular en **Python**, ideal para estudiantes y entusiastas de la criptografía.  
+- Configuración de **rotores** para personalizar la máquina.  
 - Código abierto bajo licencia **MIT**.
 
 ---
@@ -26,7 +26,7 @@ El objetivo es recrear su funcionamiento básico en Python, permitiendo al usuar
 ## 🛠️ Requisitos
 
 - Python 3.8 o superior  
-- No se requieren librerías externas (dependencias mínimas)
+- Las librerias importadas han sido time y re.
 
 ---
 
@@ -36,3 +36,7 @@ El objetivo es recrear su funcionamiento básico en Python, permitiendo al usuar
    ```bash
    git clone https://github.com/songorren02/AA1.2_enigma.git
    cd AA1.2_enigma
+2. Ejecuta el programa main.py:
+   python enigma/main.py
+3. Primero cifra el mensaje para poder descifrarlo.
+   Si hay un mensaje previamente cifrado se va a sobreescribir y perderás el mensaje.
