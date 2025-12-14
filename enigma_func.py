@@ -122,3 +122,8 @@ def open_msg(file_name="mensaje.txt"):
     except FileNotFoundError:
         print(f"[ERROR] No se encuentra el archivo {file_name}")
     return None
+
+#Guardar el mensaje en archivo
+def save_msg(texto, file_name="Cifrado.txt"):
+    with open(file_name, "w") as file:
+        file.write(texto)

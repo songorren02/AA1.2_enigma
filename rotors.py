@@ -85,3 +85,10 @@ def avanzar_rotors(rotor_1, rotor_2, rotor_3):
         #Comprobar si en esta rotación coincide el notch
         if rotor_2["position"] == idx_notch_rotor_2:
             rotor_3["position"] = (rotor_3["position"] + 1) % AMOUNT_LETTERS
+
+#Reseteo de los rotores
+def reset_rotors(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posiciones):
+    rotor_1 = rotor_load(wiring_1, notch_1, posiciones[0])
+    rotor_2 = rotor_load(wiring_2, notch_2, posiciones[1])
+    rotor_3 = rotor_load(wiring_3, notch_3, posiciones[2])
+    return rotor_1, rotor_2, rotor_3

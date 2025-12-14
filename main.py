@@ -1,5 +1,6 @@
 import enigma_func as f
 import rotors as r
+import time
 
 NUM_ROTORES = 3
 
@@ -17,12 +18,18 @@ def position():
 
     #Preguntar la posición
     for i in range(NUM_ROTORES):
-        mensaje = input(f"Posición inicial del rotor {i+1}: ")
+        mensaje = input(f"Posición inicial del rotor {i+1}: ").upper()
         if mensaje in f.ALPH:
             rotores[i] = mensaje
         else:
             print("[ERROR] Letra no aceptada, se utilizará A por defecto")
             rotores[i] = "A"
+    
+    #Mostrar la config
+    print("[CONFIG] Configurando rotores...")
+    time.sleep(1)
+
+    print(f"[CONFIG] Tu configuración de los rotores es: {rotores}\n")
     
     return rotores
     
@@ -36,7 +43,7 @@ def print_menu():
     print("4. Salir")
  
 #Elegir opcion
-def choose_menu(rotor_1, rotor_2, rotor_3):
+def choose_menu(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posiciones):
     #Validación del input
     try:
         opt = int(input("¿Qué opción quieres hacer? "))
@@ -45,6 +52,9 @@ def choose_menu(rotor_1, rotor_2, rotor_3):
         return None
 
     if opt == 1: #Cifrar
+        #Reset de los rotores
+        rotor_1, rotor_2, rotor_3 = r.reset_rotors(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posiciones)
+
         #Abrir archivo
         msg = f.open_msg()
         
@@ -53,17 +63,26 @@ def choose_menu(rotor_1, rotor_2, rotor_3):
 
         #Añadir espacios
         texto_espaced = f.espacios(texto_encrypted)
-        print(texto_espaced)
 
-    elif opt == 2:
-        #Descifrar
-        print("descifrar")
+        #Guardar en archivo
+        f.save_msg(texto_espaced)
+
+        #Mensajes por terminal
+        print("\n[ENIGMA] Cifrando mensaje...")
+        time.sleep(1)
+        print("[ENIGMA] Mensaje cifrado con éxito!\n")
+
+    elif opt == 2: #Descifrar
+        #Reset de los rotores
+        rotor_1, rotor_2, rotor_3 = r.reset_rotors(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posiciones)
 
     elif opt == 3:
         #Funcion editar rotor
         print("Editar rotor")
+
     elif opt == 4:
         exit()
+
     else:
         print("[ERROR] Opción inválida")
 
@@ -71,13 +90,7 @@ def choose_menu(rotor_1, rotor_2, rotor_3):
 
 
 
-
 posiciones = position()
 
-#Cargamos cada rotor individualmente
-rotor_1 = r.rotor_load(wiring_1, notch_1, posiciones[0])
-rotor_2 = r.rotor_load(wiring_2, notch_2, posiciones[1])
-rotor_3 = r.rotor_load(wiring_3, notch_3, posiciones[2])
-
 print_menu()
-choose_menu(rotor_1, rotor_2, rotor_3)
+choose_menu(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posiciones)
