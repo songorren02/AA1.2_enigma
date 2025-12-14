@@ -7,6 +7,9 @@ MSG_FILE = "mensaje.txt"
 ENCRYPTED_FILE = "output/cifrado.txt"
 DECRYPTED_FILE = "output/mensaje_desencriptado.txt"
 
+#Variable de control while
+close_enigma = False
+
 #Leer rotores desde los archivos
 wiring_1, notch_1 = r.read_rotor("rotors/rotor1.txt")
 wiring_2, notch_2 = r.read_rotor("rotors/rotor2.txt")
@@ -35,7 +38,11 @@ def position():
     print(f"[CONFIG] Tu configuración de los rotores es: {rotores}\n")
     
     return rotores
-    
+
+#Pedir mensaje
+def msg_to_encrypt():
+    print()
+
 #Creamos el menú
 def print_menu():
     print("             ENIGMA")
@@ -93,13 +100,12 @@ def choose_menu(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posicio
         time.sleep(1)
         print("[ENIGMA] Mensaje desencriptado con éxito!")
 
-
-
     elif opt == 3:
         #Funcion editar rotor
         print("Editar rotor")
 
     elif opt == 4:
+        close_enigma = True
         exit()
 
     else:
@@ -111,5 +117,6 @@ def choose_menu(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posicio
 
 posiciones = position()
 
-print_menu()
-choose_menu(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posiciones)
+while not close_enigma:
+    print_menu()
+    choose_menu(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posiciones)
