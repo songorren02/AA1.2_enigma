@@ -107,3 +107,18 @@ def decrypt(texto, rotor_1, rotor_2, rotor_3):
         output += ch
     
     return output
+
+#Abrir el archivo del mensaje
+def open_msg(file_name="mensaje.txt"):
+    try:
+        with open(file_name, "r",) as file:
+            #Leer msg
+            msg = file.read()
+
+        #Normalizar msg
+        msg_normalized = normalizar_texto(msg)
+        return msg_normalized
+    
+    except FileNotFoundError:
+        print(f"[ERROR] No se encuentra el archivo {file_name}")
+    return None

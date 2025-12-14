@@ -1,7 +1,7 @@
 import enigma_func as f
 import rotors as r
-NUM_ROTORES = 3
 
+NUM_ROTORES = 3
 
 #Leer rotores desde los archivos
 wiring_1, notch_1 = r.read_rotor("rotors/rotor1.txt")
@@ -11,7 +11,11 @@ wiring_3, notch_3 = r.read_rotor("rotors/rotor3.txt")
 #Pedimos al usuario la posición en la que quiere que empiecen los rotores
 def position():
     print("En qué posición quieres que empiecen los rotores? ")
+    
+    #Inicialización de la lista de la posición inicial
     rotores = ["*"] * NUM_ROTORES
+
+    #Preguntar la posición
     for i in range(NUM_ROTORES):
         mensaje = input(f"Posición inicial del rotor {i+1}: ")
         if mensaje in f.ALPH:
@@ -21,15 +25,7 @@ def position():
             rotores[i] = "A"
     
     return rotores
-
-posiciones = position()
-
-#Cargamos cada rotor individualmente
-rotor_1 = r.rotor_load(wiring_1, notch_1, posiciones[0])
-rotor_2 = r.rotor_load(wiring_2, notch_2, posiciones[1])
-rotor_3 = r.rotor_load(wiring_3, notch_3, posiciones[2])
-        
-
+    
 #Creamos el menú
 def print_menu():
     print("             ENIGMA")
@@ -39,8 +35,6 @@ def print_menu():
     print("3. Editar rotores")
     print("4. Salir")
  
-print_menu()
-
 #Elegir opcion
 def choose_menu(rotor_1, rotor_2, rotor_3):
     #Validación del input
@@ -50,15 +44,12 @@ def choose_menu(rotor_1, rotor_2, rotor_3):
         print("[ERROR] Debes introducir un número")
         return None
 
-    if opt == 1:
-        #Cifrar
-        texto = input("Introduce el texto a cifrar: ")
-        
-        #Normalizar el texto (aA)
-        texto = f.normalizar_texto(texto)
+    if opt == 1: #Cifrar
+        #Abrir archivo
+        msg = f.open_msg()
         
         #Encriptar el texto
-        texto_encrypted = f.encrypt(texto, rotor_1, rotor_2, rotor_3)
+        texto_encrypted = f.encrypt(msg, rotor_1, rotor_2, rotor_3)
 
         #Añadir espacios
         texto_espaced = f.espacios(texto_encrypted)
@@ -76,4 +67,17 @@ def choose_menu(rotor_1, rotor_2, rotor_3):
     else:
         print("[ERROR] Opción inválida")
 
+
+
+
+
+
+posiciones = position()
+
+#Cargamos cada rotor individualmente
+rotor_1 = r.rotor_load(wiring_1, notch_1, posiciones[0])
+rotor_2 = r.rotor_load(wiring_2, notch_2, posiciones[1])
+rotor_3 = r.rotor_load(wiring_3, notch_3, posiciones[2])
+
+print_menu()
 choose_menu(rotor_1, rotor_2, rotor_3)
