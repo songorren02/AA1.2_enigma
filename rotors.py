@@ -1,6 +1,5 @@
 import string
 
-
 ALPH = string.ascii_uppercase #Constante del alfabeto
 AMOUNT_LETTERS = 26 #Constante de cantidad de letras del alfabeto
 
@@ -9,7 +8,7 @@ def read_rotor(rotor_file):
     try:
         with open(rotor_file, "r") as file:
             
-            #Leer las lineas del rotor (obtendremos espacios y mierdas)
+            #Leer las lineas del rotor (obtendremos espacios y /n)
             lines_raw = file.readlines()
 
             #Lista de las lineas que queremos (ABCDE, notch)
@@ -26,11 +25,15 @@ def read_rotor(rotor_file):
 
         #Abecedario desordenado y notch
         wiring = lines[0]
+        
         #Definir Z = notch si no hay uno predefinido
-        notch = lines[1] if len(lines) > 1 else "Z" 
+        if len(lines) > 1:
+            notch = lines[1]
+        else:
+            notch = "Z"
 
         #Validar notch y wiring
-        if len(wiring) != 26 or set(wiring) != set(ALPH):
+        if len(wiring) != AMOUNT_LETTERS or set(wiring) != set(ALPH):
             print(f"[ERROR] {rotor_file}: Abecedario inválido")
             return None
         
