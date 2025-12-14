@@ -37,6 +37,8 @@ El objetivo es recrear su funcionamiento básico en Python, permitiendo al usuar
    git clone https://github.com/songorren02/AA1.2_enigma.git
    cd AA1.2_enigma
 2. Ejecuta el programa main.py:
+   ```python
    python enigma/main.py
-3. Primero cifra el mensaje para poder descifrarlo.
+4. Primero cifra el mensaje para poder descifrarlo.
+   ```
    Si hay un mensaje previamente cifrado se va a sobreescribir y perderás el mensaje.
