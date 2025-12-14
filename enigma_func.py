@@ -127,3 +127,41 @@ def open_msg(file_name):
 def save_msg(texto, file_name):
     with open(file_name, "w") as file:
         file.write(texto)
+
+def edit_rotor():
+    try:
+        rotor_num = int(input("Qué rotor quieres editar? (1, 2 o 3) "))
+    except ValueError:
+        print("[ERROR] Debes introducir un número válido")
+        return None
+
+    #Verificar si el input es válido
+    if rotor_num not in [1, 2, 3]:
+        print("[ERROR] Solo puedes elegir 1, 2 o 3")
+        return None
+
+    #Pedir nuevo wiring y notch
+    new_wiring = input("Introduce el nuevo wiring (26 letras A-Z sin repetir): ").upper()
+    new_notch = input("Introduce el nuevo notch (una letra A-Z): ").upper()
+
+    #Validar wiring
+    if len(new_wiring) != AMOUNT_LETTERS or set(new_wiring) != set(ALPH):
+        print(f"[ERROR] Abecedario inválido")
+        return None   
+
+    #Validar notch
+    if new_notch not in ALPH:
+        print("[ERROR] Notch inválido")
+        return None
+
+    #Guardar los cambios en los archivos
+    file_name = f"rotors/rotor{rotor_num}.txt"
+
+    #Abrir y escribir (Sobreescribir)
+    with open(file_name, "w", encoding="utf-8") as rotor_file:
+        #Escribir el wiring
+        rotor_file.write(new_wiring + "\n")
+        #Escribir el notch
+        rotor_file.write(new_notch + "\n")
+  
+    return rotor_num

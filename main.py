@@ -102,7 +102,19 @@ def choose_menu(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posicio
 
     elif opt == 3:
         #Funcion editar rotor
-        print("Editar rotor")
+        rotor_num = f.edit_rotor()        
+        
+        #Miramos cual es el rotor modificado
+        if rotor_num == 1:
+            wiring_1, notch_1 = r.read_rotor("rotors/rotor1.txt")
+        elif rotor_num == 2:
+            wiring_2, notch_2 = r.read_rotor("rotors/rotor2.txt")
+        elif rotor_num == 3:
+            wiring_3, notch_3 = r.read_rotor("rotors/rotor3.txt")
+
+
+        #Reset de los rotores
+        rotor_1, rotor_2, rotor_3 = r.reset_rotors(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posiciones)
 
     elif opt == 4:
         close_enigma = True
