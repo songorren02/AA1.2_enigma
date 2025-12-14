@@ -11,7 +11,7 @@ El objetivo es recrear su funcionamiento básico en Python, permitiendo al usuar
 - `LICENSE` → Licencia MIT, que permite usar y modificar libremente el código.  
 - `README.md` → Documento de presentación del proyecto.  
 - `rotors/` → Archivos .txt de los rotores usados en el proyecto. Por defecto vienen los rotores típicos de la máquina real.
-- - `output/` → Contiene los archivos de output generados por el programa: cifrado.txt y desencriptado.txt.
+- `output/` → Contiene los archivos de output generados por el programa: cifrado.txt y desencriptado.txt.
 
 ---
 
