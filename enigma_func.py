@@ -9,14 +9,17 @@ texto_prueba = "Hola, qUe! tal. estas?"
 
 #Estandarizar el formato de texto
 def normalizar_texto(texto):
-
     #Quitamos mayusculas, espacios y caracteres especiales
     texto = texto.upper()
     texto = texto.replace(" ", "")
     texto = re.sub(r'[^A-Z]', '', texto) 
 
-    contador = 0
+    return texto
+
+#Función añadir espacios
+def espacios(texto):
     texto_new = ""
+    contador = 0
 
     #Añadimos espacios nuevos cada 5 caracteres
     for ch in texto:
@@ -26,9 +29,6 @@ def normalizar_texto(texto):
         contador += 1
 
     return texto_new
-
-normalizar_texto(texto_prueba)
-
 
 #Pasar las letras por los rotores para encriptar luego
 def input_rotor_encrypt(rotor, letra):

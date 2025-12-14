@@ -38,21 +38,35 @@ def print_menu():
     print("2. Descifrar mensaje")
     print("3. Editar rotores")
     print("4. Salir")
-
  
 print_menu()
 
+#Elegir opcion
 def choose_menu(rotor_1, rotor_2, rotor_3):
-    opt = int(input("¿Qué opción quieres hacer? "))
+    #Validación del input
+    try:
+        opt = int(input("¿Qué opción quieres hacer? "))
+    except ValueError:
+        print("[ERROR] Debes introducir un número")
+        return None
 
     if opt == 1:
+        #Cifrar
         texto = input("Introduce el texto a cifrar: ")
+        
+        #Normalizar el texto (aA)
         texto = f.normalizar_texto(texto)
-        print(f.encrypt(texto, rotor_1, rotor_2, rotor_3))
+        
+        #Encriptar el texto
+        texto_encrypted = f.encrypt(texto, rotor_1, rotor_2, rotor_3)
+
+        #Añadir espacios
+        texto_espaced = f.espacios(texto_encrypted)
+        print(texto_espaced)
+
     elif opt == 2:
-        texto = input("Introduce el texto a cifrar: ")
-        texto = f.normalizar_texto(texto)
-        print(f.decrypt(texto, rotor_1, rotor_2, rotor_3))
+        #Descifrar
+        print("descifrar")
 
     elif opt == 3:
         #Funcion editar rotor
