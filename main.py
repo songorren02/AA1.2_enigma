@@ -39,13 +39,10 @@ def position():
     
     return rotores
 
-#Pedir mensaje
-def msg_to_encrypt():
-    print()
 
 #Creamos el menú
 def print_menu():
-    print("             ENIGMA")
+    print("\n             ENIGMA")
     print("-------------------------------")
     print("1. Cifrar mensaje")
     print("2. Descifrar mensaje")
@@ -65,6 +62,9 @@ def choose_menu(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posicio
         #Reset de los rotores
         rotor_1, rotor_2, rotor_3 = r.reset_rotors(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posiciones)
 
+        #Pedir mensaje
+        f.msg_to_encrypt(MSG_FILE)
+        
         #Abrir archivo
         msg = f.open_msg(MSG_FILE)
         
@@ -112,9 +112,15 @@ def choose_menu(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posicio
         elif rotor_num == 3:
             wiring_3, notch_3 = r.read_rotor("rotors/rotor3.txt")
 
-
         #Reset de los rotores
         rotor_1, rotor_2, rotor_3 = r.reset_rotors(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posiciones)
+
+        #Mensajes por terminal
+        print("\n[CONF] Cambiando rotores...")
+        time.sleep(0.5)
+        print("[CONF] Reseteando rotores...")
+        time.sleep(0.5)
+        print("[CONF] Rotores cambiados con éxito!")
 
     elif opt == 4:
         close_enigma = True
@@ -122,9 +128,6 @@ def choose_menu(wiring_1, notch_1, wiring_2, notch_2, wiring_3, notch_3, posicio
 
     else:
         print("[ERROR] Opción inválida")
-
-
-
 
 
 posiciones = position()

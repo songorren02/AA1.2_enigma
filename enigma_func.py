@@ -165,3 +165,14 @@ def edit_rotor():
         rotor_file.write(new_notch + "\n")
   
     return rotor_num
+
+#Pedir mensaje
+def msg_to_encrypt(file_name="mensaje.txt"):
+    #Pedir mensaje al usuario
+    msg = input("Escribe el mensaje a encriptar: ")
+
+    #Guardar tal cual en el archivo ya que luego lo parseamos
+    with open(file_name, "w") as file:
+        file.write(msg)
+    
+    print("[CONF] Mensaje guardado con éxito")
